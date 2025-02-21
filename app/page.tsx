@@ -16,6 +16,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { testimonials } from '../data/testimonials';
 import Autoplay from 'embla-carousel-autoplay';
+import { motion } from 'framer-motion';
 
 
 
@@ -92,13 +93,45 @@ export default function Home() {
     ));
   };
 
+  useEffect(() => {
+    const links = document.querySelectorAll('nav a');
 
+    links.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href');
+        if (targetId) {
+          const targetElement = document.querySelector(targetId);
+          if (targetElement) {
+            targetElement.scrollIntoView({
+              behavior: 'smooth',
+            });
+          }   
+        }
+      });
+    });
 
+    return () => {
+      links.forEach(link => {
+        link.removeEventListener('click', () => {});
+      });
+    };
+  }, []);
 
   return (
-    <div className="min-h-screen">
+    <motion.div 
+      className="min-h-screen" 
+      initial={{ opacity: 0 }} 
+      animate={{ opacity: 1 }} 
+      transition={{ duration: 0.5 }}
+    >
       {/* Navigation */}
-      <nav className="flex items-center justify-between p-4 md:p-4 bg-[#FFFFFF] ">
+      <motion.nav 
+        className="flex items-center justify-between p-4 md:p-4 bg-[#FFFFFF] "
+        initial={{ y: -20 }} 
+        animate={{ y: 0 }} 
+        transition={{ duration: 0.5 }}
+      >
         <div className="flex items-center">
           <Image
             src="/logo.png"
@@ -110,18 +143,24 @@ export default function Home() {
          
         </div>
         <div className="hidden md:flex space-x-6 font-jakarta ">
-          <a href="#" className="hover:text-[#C1121F] text-sm text-[#2C2C31] font-bold">À PROPOS</a>
-          <a href="#" className="hover:text-[#C1121F] text-sm text-[#2C2C31] font-bold">NOS SERVICES</a>
-          <a href="#" className="hover:text-[#C1121F] text-sm text-[#2C2C31] font-bold">TÉMOIGNAGES</a>
-          <a href="#" className="hover:text-[#C1121F] text-sm text-[#2C2C31] font-bold">CONTACT</a>
+          <a  href="#about" className="hover:text-[#C1121F] text-sm text-[#2C2C31] font-bold">À PROPOS</a>
+          <a href="#services" className="hover:text-[#C1121F] text-sm text-[#2C2C31] font-bold">NOS SERVICES</a>
+          <a href="#testimonials" className="hover:text-[#C1121F] text-sm text-[#2C2C31] font-bold">TÉMOIGNAGES</a>
+          <a href="#contact" className="hover:text-[#C1121F] text-sm text-[#2C2C31] font-bold">CONTACT</a>
         </div>
         <button className="bg-[#C1121F] flex items-center gap-2 text-white font-medium text-base font-jakarta  px-4 py-3 rounded-lg hover:bg-red-700">
          <span> <Smartphone size={16} /></span> Télécharger l&apos;app
         </button>
-      </nav>
+      </motion.nav>
 
       {/* Hero Section */}
-      <section className="px-4 md:px-20   bg-[#FFEEF0] flex flex-col md:flex-row md:gap-x-4 items-center">
+      <motion.section 
+        id="about"
+        className="px-4 md:px-20   bg-[#FFEEF0] flex flex-col md:flex-row md:gap-x-4 items-center"
+        initial={{ y: -50 }} 
+        animate={{ y: 0 }} 
+        transition={{ duration: 0.5 }}
+      >
       <div className="md:w-1/2 space-y-6">
         <h1 className="text-4xl font-jakarta w-[617px] md:text-[56px] md:leading-normal font-extrabold">
           Gérez vos livraisons à l&apos;internationale avec <span className="text-[#C1121F] text-[56px] font-extrabold ">Yabalma</span>
@@ -156,10 +195,16 @@ Lorem ipsum dolor sit amet consectetur. Nulla consequat arcu risus accumsan nisl
             className=""
           />
         </div>
-      </section>
+      </motion.section>
 
       {/* Services Section */}
-      <section className="text-center py-16 bg-[#FFF8F8]">
+      <motion.section 
+        id="services"
+        className="text-center py-16 bg-[#FFF8F8]"
+        initial={{ opacity: 0 }} 
+        animate={{ opacity: 1 }} 
+        transition={{ duration: 0.5 }}
+      >
   <h2 className="text-5xl pb-2 font-bold font-jakarta text-[#3F3F46]">Nos services</h2>
   <p className="text-[#606065] font-normal font-jakarta text-base leading-5 max-w-xl mx-auto mt-3">
     Lorem ipsum dolor sit amet consectetur. Nulla consequat arcu risus
@@ -201,7 +246,7 @@ Lorem ipsum dolor sit amet consectetur. Nulla consequat arcu risus accumsan nisl
       </p>
     </div>
   </div>
-      </section>
+      </motion.section>
 
   {/* Validation Section */}
   <section className="px-4  py-4 bg-[#FFF2F3]">
@@ -398,7 +443,7 @@ Lorem ipsum dolor sit amet consectetur. Nulla consequat arcu risus accumsan nisl
       </section>
 
       {/* Team Section */}
-      <section className="bg-[url('/terre.png')] bg-cover bg-center px-4 md:px-24 py-8 mt-10">
+      <section id="about" className="bg-[url('/terre.png')] bg-cover bg-center px-4 md:px-24 py-8 mt-10">
         <div className="flex flex-col md:flex-row  gap-12">
           <div className="md:w-1/2">
             <div className="">
@@ -487,7 +532,13 @@ Lorem ipsum dolor sit amet consectetur. Nulla consequat arcu risus accumsan nisl
       </section>
 
       {/* Testimonials Section */}
-      <div className="w-full max-w-7xl mx-auto px-4 py-12">
+      <motion.div 
+        id="testimonials"
+        className="w-full max-w-7xl mx-auto px-4 py-12"
+        initial={{ opacity: 0 }} 
+        animate={{ opacity: 1 }} 
+        transition={{ duration: 0.5 }}
+      >
       <div className="text-center mb-12">
         <h2 className="text-5xl  font-bold font-jakarta text-[#3F3F46] mb-4">Témoignage de réussite de clients</h2>
         <p className="text-[#606065] max-w-2xl mx-auto">
@@ -531,7 +582,7 @@ Lorem ipsum dolor sit amet consectetur. Nulla consequat arcu risus accumsan nisl
           />
         ))}
       </div>
-    </div>
+    </motion.div>
     <section className="bg-[#C1121F] md:flex md:flex-row text-white py-16 px-4 md:px-12 flex flex-col items-center">
     <div className="md:w-1/2">
       <h1 className="text-5xl leading-[60px] w-full  font-bold  mb-4">
@@ -567,7 +618,12 @@ Lorem ipsum dolor sit amet consectetur. Nulla consequat arcu risus accumsan nisl
     </section>
 
       {/* Footer */}
-      <footer className="bg-white text-black font-inter px-4 md:px-12 py-12">
+      <motion.footer 
+        className="bg-white text-black font-inter px-4 md:px-12 py-12"
+        initial={{ y: 50 }} 
+        animate={{ y: 0 }} 
+        transition={{ duration: 0.5 }}
+      >
         <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
           <div className="flex flex-col gap-4">
             <Image src="/logo.png" alt="Yabalma" width={100} height={100} className="mr-2" />
@@ -640,7 +696,7 @@ Lorem ipsum dolor sit amet consectetur. Nulla consequat arcu risus accumsan nisl
           </p>
          </div>
         </div>
-      </footer>
+      </motion.footer>
 
       <Script
             async
@@ -660,6 +716,6 @@ Lorem ipsum dolor sit amet consectetur. Nulla consequat arcu risus accumsan nisl
                 `,
             }}
         />
-    </div>
+    </motion.div>
   );
 }
