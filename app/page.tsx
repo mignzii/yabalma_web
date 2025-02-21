@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, ChevronLeft, ChevronRight, Star, Package, ShoppingCart, Plus, Minus, Smartphone, ShoppingBasket, Truck, MapPinCheckInside, Banknote, List, ArrowLeft, Instagram ,  } from "lucide-react";
+import { Star,  Plus, Minus, Smartphone, ShoppingBasket, Truck, MapPinCheckInside, Banknote, List, ArrowLeft, Instagram ,  } from "lucide-react";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import Clarity from '@microsoft/clarity';
@@ -114,7 +114,7 @@ export default function Home() {
     return () => {
       links.forEach(link => {
         link.removeEventListener('click', () => {});
-      });
+      }); 
     };
   }, []);
 
@@ -134,7 +134,7 @@ export default function Home() {
       >
         <div className="flex items-center">
           <Image
-            src="/logo.png"
+            src="./LOGO.png"
             alt="Logo Yabalma"
             width={50}
             height={50}
@@ -626,7 +626,7 @@ Lorem ipsum dolor sit amet consectetur. Nulla consequat arcu risus accumsan nisl
       >
         <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
           <div className="flex flex-col gap-4">
-            <Image src="/logo.png" alt="Yabalma" width={100} height={100} className="mr-2" />
+            <Image src="./LOGO.png" alt="Yabalma" width={100} height={100} className="mr-2" />
             <p className="text-[#3F3F46] font-inter font-normal text-base leading-6">
             Top learning experiences that create more talent in the world.            </p>
           </div>
