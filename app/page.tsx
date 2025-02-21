@@ -96,7 +96,7 @@ export default function Home() {
 
 
   return (
-    <div className="min-h-screen container mx-auto">
+    <div className="min-h-screen">
       {/* Navigation */}
       <nav className="flex items-center justify-between p-4 md:p-4 bg-[#FFFFFF] ">
         <div className="flex items-center">
@@ -121,7 +121,7 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section className="px-4 md:px-20 md:w-full  bg-[#FFEEF0] flex flex-col md:flex-row md:gap-x-4 items-center">
+      <section className="px-4 md:px-20   bg-[#FFEEF0] flex flex-col md:flex-row md:gap-x-4 items-center">
       <div className="md:w-1/2 space-y-6">
         <h1 className="text-4xl font-jakarta w-[617px] md:text-[56px] md:leading-normal font-extrabold">
           Gérez vos livraisons à l&apos;internationale avec <span className="text-[#C1121F] text-[56px] font-extrabold ">Yabalma</span>
@@ -613,7 +613,7 @@ Lorem ipsum dolor sit amet consectetur. Nulla consequat arcu risus accumsan nisl
                   height={38}
                 />
               </a>
-              <a href="#" className="hover:opacity- 80">
+              <a href="#" className="hover:opacity-80">
                 <Image
                   src="/playstore.png"
                   alt="Play Store"
