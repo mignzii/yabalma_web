@@ -163,7 +163,7 @@ export default function Home() {
       >
         <div className="md:w-1/2 space-y-6">
           <h1 className="text-4xl font-jakarta w-[617px] md:text-[56px] md:leading-normal font-extrabold">
-            <span className="text-[#C1121F]">Validez</span> vos paniers et faites vous <span className="text-[#C1121F]">livrer</span> au Sénégal
+            <span className="text-[#C1121F]">Valide</span> tes paniers et fait toi <span className="text-[#C1121F]">livrer</span> au Sénégal
             <span className="inline-block ml-1"><svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
               <g clipPath="url(#clip0_2252_2394)">
                 <path d="M3.55556 4.44434C2.61256 4.44434 1.70819 4.81894 1.0414 5.48573C0.374602 6.15253 0 7.0569 0 7.99989L0 23.9999C0 24.9429 0.374602 25.8473 1.0414 26.514C1.70819 27.1808 2.61256 27.5554 3.55556 27.5554H10.6667V4.44434H3.55556Z" fill="#00853F" />
@@ -178,8 +178,11 @@ export default function Home() {
               </defs>
             </svg></span>
           </h1>
+
+          <p className="text-[#606065] w-[500px] text-justify font-bold font-jakarta text-base leading-5">
+            YABALMA</p>
           <p className="text-[#606065] w-[500px] text-justify font-normal font-jakarta text-base leading-5">
-            YABALMA est l'application révolutionnaire qui change votre manière de commander sur les sites de E-Commerce ! Depuis l'application mobile, commandez sur les sites de E-Commerce internationaux tels que Shein, Tému, Aliexpress... Choisissez un transporteur de confiance et payez directement avec votre mobile money local !         </p>
+            est l'application révolutionnaire qui change ta manière de commander sur les sites de E-Commerce! Depuis l'application mobile, commande sur #Shein, #Tému, #Aliexpress... Choisis un transporteur, paie avec ton mobile money #Wave #OM et suis ton colis jusqu'à la livraison !      </p>
           <div className="flex items-center space-x-[10px]">
             <div className="flex ">
               <Image src="/avatar/Rectangle 2.png" alt="User 1" width={36} height={36} className="rounded-full border-2 border-white" />
@@ -220,7 +223,7 @@ export default function Home() {
       >
         <h2 className="text-5xl pb-2 font-bold font-jakarta text-[#3F3F46]">Nos services</h2>
         <p className="text-[#606065] font-normal font-jakarta text-base leading-5 max-w-xl mx-auto mt-3">
-          Nous vous proposons différents services pour faciliter vos commandes à l'international
+          Nous te proposons différents services pour faciliter tes commandes à l'international
         </p>
 
         <div className="grid md:grid-cols-3 gap-6 mt-10 max-w-5xl mx-auto">
@@ -230,8 +233,8 @@ export default function Home() {
             </div>
             <h3 className="text-lg font-semibold text-gray-900 mt-4">Validation panier</h3>
             <div className="w-10 h-1 bg-[#C1121F] mx-auto mt-2"></div>
-            <p className="text-[#737373] font-montserrat mt-3 text-sm">
-              Choisissez vos articles sur le site du E-commerçant, collez le lien de votre panier dans l'application et finalisez votre shopping en toute sécurité.
+            <p className="text-left text-[#737373] font-montserrat mt-3 text-sm">
+              Choisis tes articles sur le site du E-commerçant, partage le lien de ton panier dans l'application et finalise ton shopping en toute sécurité.
             </p>
           </div>
 
@@ -241,8 +244,8 @@ export default function Home() {
             </div>
             <h3 className="text-lg font-semibold text-gray-900 mt-4">Shopping dans l'application</h3>
             <div className="w-10 h-1 bg-[#C1121F] mx-auto mt-2"></div>
-            <p className="text-[#737373] font-montserrat mt-3 text-sm">
-              A défaut de coller le lien du panier, vous pouvez choisir votre site de E-commerce préféré dans l'application directement, naviguer et choisir vos articles puis appuyer sur le bouton 'télécharger le panier', vos articles sont récupérés et vous continuez le process de paiement dans l'application.
+            <p className="text-left text-[#737373] font-montserrat mt-3 text-sm">
+              Navigue directement sur tes sites de e-commerce préférés depuis l'application YABALMA, choisis tes articles puis appuie sur le bouton 'télécharger le panier' pour finaliser ta commande.
             </p>
           </div>
 
@@ -252,8 +255,8 @@ export default function Home() {
             </div>
             <h3 className="text-lg font-semibold text-gray-900 mt-4">Choix transporteur</h3>
             <div className="w-10 h-1 bg-[#C1121F] mx-auto mt-2"></div>
-            <p className="text-[#737373] font-montserrat mt-3 text-sm">
-              Une fois votre commande complète, vous pouvez choisir votre transporteur de confiance directement dans l'application pour l'envoie de votre colis !
+            <p className="text-left text-[#737373] font-montserrat mt-3 text-sm">
+              Une fois la commande complète, tu peux choisir un transporteur de confiance dans l'application pour l'envoie de ton colis !
             </p>
           </div>
 
@@ -263,8 +266,8 @@ export default function Home() {
             </div>
             <h3 className="text-lg font-semibold text-gray-900 mt-4">Suivi de colis</h3>
             <div className="w-10 h-1 bg-[#C1121F] mx-auto mt-2"></div>
-            <p className="text-[#737373] font-montserrat mt-3 text-sm">
-              Vous pourrez suivre votre commande à tout instant avec le statut du colis mis à jour à chaque étape du trajet !
+            <p className="text-left text-[#737373] font-montserrat mt-3 text-sm">
+              Tu pourras suivre ta commande à tout instant avec le statut du colis mis à jour à chaque étape du trajet !
             </p>
           </div>
         </div>
@@ -275,7 +278,7 @@ export default function Home() {
         <div className="flex flex-col justify-center h-[450px] md:flex-row items-center gap-12">
           <div className="md:w-1/2 space-y-6  pb-4">
             <h2 className="text-5xl leading-[60px] mt-20 font-bold font-jakarta w-[550px] text-[#3F3F46]">
-              Plusieures commandes sur des sites <span className="text-[#C1121F]"> diférents</span>? Pas de panique ! Vous pouvez <span className="text-[#C1121F]">Regrouper</span> vos colis en une seule livraison
+              Plusieures commandes sur des sites <span className="text-[#C1121F]"> diférents</span>? Pas de panique ! <br /> Tu peux <span className="text-[#C1121F]">Regrouper</span> tes colis en une seule livraison
               <span className="inline-block ml-1"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
                 <g clipPath="url(#clip0_2252_2394)">
                   <path d="M3.55556 4.44434C2.61256 4.44434 1.70819 4.81894 1.0414 5.48573C0.374602 6.15253 0 7.0569 0 7.99989L0 23.9999C0 24.9429 0.374602 25.8473 1.0414 26.514C1.70819 27.1808 2.61256 27.5554 3.55556 27.5554H10.6667V4.44434H3.55556Z" fill="#00853F" />
@@ -291,7 +294,7 @@ export default function Home() {
               </svg></span>
             </h2>
             <p className="text-[#606065] w-[550px] font-normal font-jakarta text-base ">
-              Avec nos option 'Blocage panier' et 'Regroupement colis', rien de plus simple! <span className="text-[#C1121F]">Bloquez</span>  votre commande dès la reception en entrepôt puis <span className="text-[#C1121F]">Regroupez</span> tous les colis en une seule livaison au Sénégal     </p>
+              Avec l'option 'Blocage panier' et 'Regroupement colis', rien de plus simple! <span className="text-[#C1121F]">Bloque</span> ta commande dès la reception en entrepôt puis <span className="text-[#C1121F]">Regroupe</span> tous les colis en un seul envoie au Sénégal     </p>
             <button className="bg-[#C1121F] text-white px-8 py-3 rounded-lg hover:bg-red-700 inline-flex items-center gap-2">
               J&apos;ouvre mon compte
             </button>
@@ -316,7 +319,7 @@ export default function Home() {
         <div className="text-center  max-w-3xl mx-auto mb-16">
           <h2 className="font-jakarta text-5xl font-bold mb-4">Découvrez les avantages</h2>
           <p className="text-gray-600 ">
-            Yabalma est là pour faciliter le process de commande sur vos sites de E-commerce internationaux depuis l'Afrique. L'appli est spécifiquement pensée pour toi !
+            Yabalma est là pour te faciliter le processus de commande sur tes sites de E-commerce internationaux depuis l'Afrique. L'appli est spécifiquement pensée pour toi !
           </p>
         </div>
 
@@ -381,7 +384,7 @@ export default function Home() {
                 </div>
                 <div>
                   <h3 className="text-sm font-medium font-jakarta w-[215px] text-[#1F2937]  ">
-                    Choisi ton transporteur de confiance dans l&apos;application
+                    Choisis ton transporteur de confiance
                   </h3>
 
                 </div>
@@ -424,7 +427,7 @@ export default function Home() {
               Un service de livraison par GP bientôt disponible!
             </h2>
             <p className="text-[#ffffff] font-jakarta font-normal text-base leading-6">
-              Envoie et réception de vos colis entre l'Afrique et le reste du monde à moindre coût ! Suivi de votre colis du départ jusqu'à la livraison.
+              Envoie et réception de tes colis entre l'Afrique et le reste du monde à moindre coût ! Suivi de ton colis du départ jusqu'à la livraison.
             </p>
             <div className="flex flex-col sm:flex-row sm:space-x-2 gap-4">
 
@@ -444,7 +447,7 @@ export default function Home() {
                   <span className="text-black  font-boldfont-jakarta text-[22px] leading-7">↗</span>
                 </div>
                 <p className="text-[#606065] text-base font-jakarta font-normal leading-6">
-                  Track toutes les étapes de ton colis jusqu'à la livraison
+                  Suis toutes les étapes de ton colis jusqu'à la livraison
                 </p>
               </div>
             </div>
@@ -498,8 +501,10 @@ export default function Home() {
                 </button>
                 {openAccordion === "who" && (
                   <div className="px-6 pb-4">
-                    <p className="text-gray-600">
-                      Yabalma est le fruit de l’imagination de deux sœurs ambitieuses ; Fama et Ami qui ont toujours été animées par l’esprit entrepreneurial, l’innovation et le business.</p> <span className="text-[#C1121F]">"</span>
+
+                    Yabalma est le fruit de l’imagination de deux sœurs ambitieuses, Fama et Ami, qui ont toujours été animées par l’esprit entrepreneurial, l’innovation et le business.
+                    Mais ce projet n’aurait pas pu voir le jour sans l’implication et le travail acharné d’une équipe passionnée. Développeurs, designers, professionnels du transport de colis vers l’Afrique, chacun a apporté son expertise pour construire une plateforme intuitive, sécurisée et adaptée aux besoins des utilisateurs.
+                    Grâce à cette collaboration dynamique, Yabalma est aujourd’hui bien plus qu’une application : c’est une solution révolutionnaire qui simplifie les achats en ligne et le transport vers le Sénégal.
                   </div>
                 )}
               </div>
@@ -520,8 +525,8 @@ export default function Home() {
                 {openAccordion === "values" && (
                   <div className="px-6 pb-4">
                     <p className="text-gray-600">
-                      <span className="text-[#C1121F]">INNOVATION</span> : Parce que nous repoussons les limites du secteur numérique et logistique pour créer des solutions toujours plus efficaces et modernes. <span className="text-[#C1121F]">INTRAPRENARIAT</span> : Nous croyons en la capacité et au génie de chaque collaborateur chez Yabalma. Chaque acteur est autonome et force de proposition. <span className="text-[#C1121F]">INTÉGRITÉ</span> : La confiance est au cœur de tout ce que nous faisons. Notre optique est la fiabilité de nos collations à tous les niveaux.
-                      avec Yabalma, nous bâtissons un pont entre l'innovation, l’entrepreneuriat et la confiance pour vous offrir le meilleur service possible !!
+                      <span className="text-[#C1121F] font-bold" > Innovation </span>  : Parce que nous repoussons les limites du secteur numérique et logistique pour créer des solutions toujours plus efficaces et modernes. <br /> <span className="text-[#C1121F] font-bold">Intraprenariat</span> : Nous croyons en la capacité et au génie de chaque collaborateur chez Yabalma. Chaque acteur est autonome et force de proposition. <br /> <span className="text-[#C1121F] font-bold">Intraprenariat</span> : La confiance est au cœur de tout ce que nous faisons. Notre optique est la fiabilité de nos collations à tous les niveaux.
+
                     </p>
                   </div>
                 )}
@@ -543,7 +548,7 @@ export default function Home() {
                 {openAccordion === "vision" && (
                   <div className="px-6 pb-4">
                     <p className="text-gray-600">
-                      Devenir les leaders sur toute la ligne de logistique en Afrique.
+                      Devenir le leader de la logistique de colis vers l'Afrique en offrant une solution complète et adaptée aux consommateurs pour leurs achats en ligne internationaux.
                     </p>
                   </div>
                 )}
@@ -565,7 +570,7 @@ export default function Home() {
         <div className="text-center mb-12">
           <h2 className="text-5xl  font-bold font-jakarta text-[#3F3F46] mb-4">Témoignage de réussite de clients</h2>
           <p className="text-[#606065] max-w-2xl mx-auto">
-            #Données exemple#
+
           </p>
         </div>
 
@@ -608,11 +613,15 @@ export default function Home() {
       <section className="bg-[#C1121F] md:flex md:flex-row text-white py-16 px-4 md:px-12 flex flex-col items-center">
         <div className="md:w-1/2">
           <h1 className="text-5xl leading-[60px] w-full  font-bold  mb-4">
-            Que vous soyez transporteur ou particulier, Yabalma est là pour vous !
+            Que tu sois transporteur ou particulier, Yabalma est là pour toi !
           </h1>
-          <p className="text-left w-[500px] font-jakarta text-gray-300/90 font-normal text-base leading-6 mb-8">
-            Particulier ? Télécharge vite l'application et fait ton chopping sans frontière
-            Transporteur ? Publie des annonces de trajet et trouve facilement tes prochains client
+          <p className="text-left w-[500px] font-jakarta text-white-300/90 font-normal text-base leading-6 mb-8">
+            Particulier ? Télécharge l’application et fais ton shopping sans frontière ! <br />
+            Transporteur ? Publie tes trajets, trouve des clients facilement et développe ton activité ! <br />
+            Avec Yabalma, nous bâtissons un pont entre l'innovation, l’entrepreneuriat et la confiance pour vous offrir le meilleur service possible. <br /> <br /> <br />
+          </p>
+          <p className="text-left w-[500px] font-jakarta text-white-300/90 font-bold text-base leading-6 mb-8">
+            Télécharge vite l'application !
           </p>
           <div className="flex space-x-4">
             <a href="#" className="">
@@ -651,7 +660,7 @@ export default function Home() {
           <div className="flex flex-col gap-4">
             <Image src="./LOGO.png" alt="Yabalma" width={100} height={100} className="mr-2" />
             <p className="text-[#3F3F46] font-inter font-normal text-base leading-6">
-              Top learning experiences that create more talent in the world.            </p>
+              Shoppez sans frontière !            </p>
           </div>
           <div>
             <h4 className="font-semibold mb-4">À propos</h4>
@@ -674,7 +683,7 @@ export default function Home() {
           <div>
             <h4 className="font-semibold mb-4">Légal</h4>
             <ul className="space-y-2">
-              <li><a href="#" className="hover:text-[#C1121F] text-[#3F3F46] font-inter font-medium text-base leading-6 ">Conditions d&apos;utilisation</a></li>
+              <li><a href="#" className="hover:text-[#C1121F] text-[#3F3F46] font-inter font-medium text-base leading-6 ">Conditions d'utilisation</a></li>
               <li><a href="#" className="hover:text-[#C1121F] text-[#3F3F46] font-inter font-medium text-base leading-6">Politique de confidentialité</a></li>
               <li><a href="#" className="hover:text-[#C1121F] text-[#3F3F46] font-inter font-medium text-base leading-6">Mentions légales</a></li>
             </ul>
