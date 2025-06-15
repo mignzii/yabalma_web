@@ -46,12 +46,12 @@ export default function Home() {
     };
 
     window.addEventListener("scroll", handleScroll);
-    handleScroll(); // Check initial visibility
+    handleScroll();
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const projectId = "qd0p087n77"; // Remplacez 'YOUR_PROJECT_ID' par votre ID de projet réel
+  const projectId = "qd0p087n77";
   useEffect(() => {
     Clarity.init(projectId);
   }, []);
@@ -85,7 +85,7 @@ export default function Home() {
         {[...Array(5)].map((_, i) => (
           <Star
             key={i}
-            className={`h-6 pl-2  w-6 ${
+            className={`h-6 pl-2 w-6 ${
               i < rating
                 ? "fill-[#FED210] text-[#FED210]"
                 : "fill-none text-[#FFFFFF]"
@@ -100,42 +100,6 @@ export default function Home() {
     setOpenAccordion(openAccordion === id ? null : id);
   };
 
-  const renderStars = (rating: number) => {
-    return Array.from({ length: 5 }, (_, index) => (
-      <span
-        key={index}
-        className={index < rating ? "text-yellow-500" : "text-gray-300"}
-      >
-        ★
-      </span>
-    ));
-  };
-
-  useEffect(() => {
-    const links = document.querySelectorAll("nav a");
-
-    links.forEach((link) => {
-      link.addEventListener("click", (e) => {
-        e.preventDefault();
-        const targetId = link.getAttribute("href");
-        if (targetId) {
-          const targetElement = document.querySelector(targetId);
-          if (targetElement) {
-            targetElement.scrollIntoView({
-              behavior: "smooth",
-            });
-          }
-        }
-      });
-    });
-
-    return () => {
-      links.forEach((link) => {
-        link.removeEventListener("click", () => {});
-      });
-    };
-  }, []);
-
   return (
     <motion.div
       className="min-h-screen"
@@ -145,7 +109,7 @@ export default function Home() {
     >
       {/* Navigation */}
       <motion.nav
-        className="flex items-center justify-between p-4 md:p-4 bg-[#FFFFFF] "
+        className="flex items-center justify-between p-4 md:p-4 bg-[#FFFFFF]"
         initial={{ y: -20 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5 }}
@@ -159,7 +123,7 @@ export default function Home() {
             className="mr-2"
           />
         </div>
-        <div className="hidden md:flex space-x-6 font-jakarta ">
+        <div className="hidden md:flex space-x-6 font-jakarta">
           <a
             href="#about"
             className="hover:text-[#C1121F] text-sm text-[#2C2C31] font-bold"
@@ -185,11 +149,10 @@ export default function Home() {
             CONTACT
           </a>
         </div>
-        <button className="bg-[#C1121F] flex items-center gap-2 text-white font-medium text-base font-jakarta  px-4 py-3 rounded-lg hover:bg-red-700">
+        <button className="bg-[#C1121F] flex items-center gap-2 text-white font-medium text-base font-jakarta px-4 py-3 rounded-lg hover:bg-red-700">
           <span>
-            {" "}
             <Smartphone size={16} />
-          </span>{" "}
+          </span>
           Télécharger l&apos;app
         </button>
       </motion.nav>
@@ -197,60 +160,30 @@ export default function Home() {
       {/* Hero Section */}
       <motion.section
         id="about"
-        className="px-4 md:px-20   bg-[#FFEEF0] flex flex-col md:flex-row md:gap-x-4 items-center"
+        className="px-4 md:px-20 bg-[#FFEEF0] flex flex-col md:flex-row md:gap-x-4 items-center"
         initial={{ y: -50 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <div className="md:w-1/2 space-y-6">
-          <h1 className="text-4xl font-jakarta w-[617px] md:text-[56px] md:leading-normal font-extrabold">
-            <span className="text-[#C1121F]">Valide</span> tes paniers et fait
-            toi <span className="text-[#C1121F]">livrer</span> au Sénégal
-            <span className="inline-block ml-1">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="50"
-                height="50"
-                viewBox="0 0 50 50"
-                fill="none"
-              >
-                <g clipPath="url(#clip0_2252_2394)">
-                  <path
-                    d="M3.55556 4.44434C2.61256 4.44434 1.70819 4.81894 1.0414 5.48573C0.374602 6.15253 0 7.0569 0 7.99989L0 23.9999C0 24.9429 0.374602 25.8473 1.0414 26.514C1.70819 27.1808 2.61256 27.5554 3.55556 27.5554H10.6667V4.44434H3.55556Z"
-                    fill="#00853F"
-                  />
-                  <path
-                    d="M10.6665 4.44434H21.3332V27.5554H10.6665V4.44434Z"
-                    fill="#FDEF42"
-                  />
-                  <path
-                    d="M28.4446 4.44434H21.3335V27.5554H28.4446C29.3876 27.5554 30.292 27.1808 30.9588 26.514C31.6256 25.8473 32.0002 24.9429 32.0002 23.9999V7.99989C32.0002 7.0569 31.6256 6.15253 30.9588 5.48573C30.292 4.81894 29.3876 4.44434 28.4446 4.44434Z"
-                    fill="#E31B23"
-                  />
-                  <path
-                    d="M16.7726 14.8212L16.0001 12.4443L15.2277 14.8212H12.729L14.7503 16.2897L13.9788 18.6666L16.0001 17.1981L18.0214 18.6666L17.2499 16.2897L19.2712 14.8212H16.7726Z"
-                    fill="#00853F"
-                  />
-                </g>
-                <defs>
-                  <clipPath id="clip0_2252_2394">
-                    <rect width="50" height="50" fill="white" />
-                  </clipPath>
-                </defs>
-              </svg>
-            </span>
+        <div className="md:w-2/3 space-y-6">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-jakarta w-full leading-tight md:leading-normal font-extrabold">
+            <span className="text-[#C1121F]">Commandez</span> sur vos sites
+            préférés
+            <br />
+            Et faites-vous <span className="text-[#C1121F]">livrer</span> au
+            Sénégal !
           </h1>
 
-          <p className="text-[#606065] w-[500px] text-justify font-bold font-jakarta text-base leading-5">
-            YABALMA
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-[#606065] lg:w-[500px] text-justify font-bold font-jakarta">
+            L'application révolutionnaire Yabalma est là !
           </p>
-          <p className="text-[#606065] w-[500px] text-justify font-normal font-jakarta text-base leading-5">
-            est l'application révolutionnaire qui change ta manière de commander
-            sur les sites de E-Commerce!
+          <p className="text-[#606065] lg:w-[500px] text-justify font-normal font-jakarta text-base leading-5">
+            Commandez facilement sur Shein, Temu, Amazon depuis une seule
+            application.
             <br />
-            Depuis votre application mobile, commandez vos sites préférés tels
-            que Shein, Tému, Aliexpress... puid choisissez un transporteur de
-            confiance et payez directement avec votre wave ou orange money !
+            Choisissez votre mode de livraison, payez avec Wave ou Orange Money,
+            <br />
+            et recevez vos colis en un temps record.
             <br />
             <br />
             <span className="font-bold text-red-600 text-lg">
@@ -258,7 +191,7 @@ export default function Home() {
             </span>
           </p>
           <div className="flex items-center space-x-[10px]">
-            <div className="flex ">
+            <div className="flex">
               <Image
                 src="/avatar/Rectangle 2.png"
                 alt="User 1"
@@ -295,8 +228,7 @@ export default function Home() {
                 className="rounded-full border-2 border-white -ml-2"
               />
             </div>
-            <span className="text-[#3F3F46] font-jakarta uppercase font-bold  text-sm leading-normal">
-              {" "}
+            <span className="text-[#3F3F46] font-jakarta uppercase font-bold text-sm leading-normal">
               +12000 utilisateurs
             </span>
           </div>
@@ -309,14 +241,106 @@ export default function Home() {
             </button>
           </div>
         </div>
-        <div className="md:w-1/2 mt-12  md:mt-0">
-          <Image
-            src="/first.png"
-            alt="App Screenshot"
-            width={600}
-            height={772}
-            className=""
-          />
+        <div className="md:w-1/4 p-2 mt-12 md:mt-0">
+          <Carousel
+            opts={{
+              loop: true,
+              align: "start",
+              containScroll: "keepSnaps",
+            }}
+            plugins={[
+              Autoplay({
+                delay: 4000,
+              }),
+            ]}
+            className="w-full"
+          >
+            <CarouselContent>
+              <CarouselItem>
+                <Image
+                  src="/app-screens/screen1.png"
+                  alt="App Screenshot 1"
+                  width={336}
+                  height={370}
+                  className="rounded-xl"
+                />
+              </CarouselItem>
+              <CarouselItem>
+                <Image
+                  src="/app-screens/screen2.png"
+                  alt="App Screenshot 2"
+                  width={336}
+                  height={370}
+                  className="rounded-xl"
+                />
+              </CarouselItem>
+              <CarouselItem>
+                <Image
+                  src="/app-screens/screen3.png"
+                  alt="App Screenshot 3"
+                  width={336}
+                  height={370}
+                  className="rounded-xl"
+                />
+              </CarouselItem>
+              <CarouselItem>
+                <Image
+                  src="/app-screens/screen4.png"
+                  alt="App Screenshot 4"
+                  width={336}
+                  height={370}
+                  className="rounded-xl"
+                />
+              </CarouselItem>
+              <CarouselItem>
+                <Image
+                  src="/app-screens/screen5.png"
+                  alt="App Screenshot 5"
+                  width={336}
+                  height={370}
+                  className="rounded-xl"
+                />
+              </CarouselItem>
+              <CarouselItem>
+                <Image
+                  src="/app-screens/screen6.png"
+                  alt="App Screenshot 6"
+                  width={336}
+                  height={370}
+                  className="rounded-xl"
+                />
+              </CarouselItem>
+              <CarouselItem>
+                <Image
+                  src="/app-screens/screen7.png"
+                  alt="App Screenshot 7"
+                  width={336}
+                  height={370}
+                  className="rounded-xl"
+                />
+              </CarouselItem>
+              <CarouselItem>
+                <Image
+                  src="/app-screens/screen8.png"
+                  alt="App Screenshot 8"
+                  width={336}
+                  height={370}
+                  className="rounded-xl"
+                />
+              </CarouselItem>
+              <CarouselItem>
+                <Image
+                  src="/app-screens/screen9.png"
+                  alt="App Screenshot 9"
+                  width={336}
+                  height={370}
+                  className="rounded-xl"
+                />
+              </CarouselItem>
+            </CarouselContent>
+            {/* <CarouselPrevious className="text-red-600 border-red-600 hover:bg-red-100 " /> */}
+            {/* <CarouselNext className="text-red-600 border-red-600 hover:bg-red-100 absolute top-1/2 -translate-y-1/2 right-0" /> */}
+          </Carousel>
         </div>
       </motion.section>
 
@@ -328,12 +352,11 @@ export default function Home() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
       >
-        <h2 className="text-5xl pb-2 font-bold font-jakarta text-[#3F3F46]">
-          Nos services
+        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl pb-2 font-bold font-jakarta text-[#3F3F46]">
+          Découvrez nos services
         </h2>
-        <p className="text-[#606065] font-normal font-jakarta text-base leading-5 max-w-xl mx-auto mt-3">
-          Nous te proposons différents services pour faciliter tes commandes à
-          l'international
+        <p className="text-base sm:text-lg md:text-xl text-[#606065] font-normal font-jakarta max-w-xl mx-auto mt-3">
+          Comment ça fonctionne ?
         </p>
 
         <div className="grid md:grid-cols-2 gap-6 mt-10 max-w-5xl mx-auto">
@@ -342,13 +365,13 @@ export default function Home() {
               <ShoppingBasket size={40} />
             </div>
             <h3 className="text-lg font-semibold text-gray-900 mt-4">
-              Validation panier
+              Validation de panier
             </h3>
             <div className="w-10 h-1 bg-[#C1121F] mx-auto mt-2"></div>
             <p className="text-left text-[#737373] font-montserrat mt-3 text-sm">
-              Choisis tes articles sur le site du E-commerçant, partage le lien
-              de ton panier dans l'application et finalise ton shopping en toute
-              sécurité.
+              Créez votre panier sur Shein, Amazon ou Temu, puis copiez le lien
+              et collez-le dans l'application Yabalma pour finaliser votre achat
+              en toute sécurité.
             </p>
           </div>
 
@@ -357,13 +380,13 @@ export default function Home() {
               <ShoppingBasket size={40} />
             </div>
             <h3 className="text-lg font-semibold text-gray-900 mt-4">
-              Shopping dans l'application
+              Shopping intégré
             </h3>
             <div className="w-10 h-1 bg-[#C1121F] mx-auto mt-2"></div>
             <p className="text-left text-[#737373] font-montserrat mt-3 text-sm">
-              Navigue directement sur tes sites de e-commerce préférés depuis
-              l'application YABALMA, choisis tes articles puis appuie sur le
-              bouton 'télécharger le panier' pour finaliser ta commande.
+              Naviguez directement sur vos sites e-commerce préférés depuis
+              Yabalma, sélectionnez vos produits et validez votre panier en
+              quelques clics.
             </p>
           </div>
 
@@ -372,89 +395,58 @@ export default function Home() {
               <Truck size={40} />
             </div>
             <h3 className="text-lg font-semibold text-gray-900 mt-4">
-              Choix transporteur
+              Mode de livraison au choix
             </h3>
             <div className="w-10 h-1 bg-[#C1121F] mx-auto mt-2"></div>
             <p className="text-left text-[#737373] font-montserrat mt-3 text-sm">
-              Une fois la commande complète, vous pouvez choisir un transporteur
-              de confiance dans l'application pour l'envoie de ton colis !
+              Livraison Express (4 à 6 jours) ou Économique (environ 2
+              semaines). Payez à la livraison ou en cours de route.
             </p>
           </div>
 
           <div className="bg-white rounded-2xl shadow-lg p-6 text-center border border-gray-200 hover:shadow-2xl transition">
             <div className="w-16 h-16 mx-auto flex items-center justify-center rounded-full bg-[#C1121F] text-white text-3xl">
-              <MapPinCheckInside size={40} />
+              <Banknote size={40} />
             </div>
             <h3 className="text-lg font-semibold text-gray-900 mt-4">
-              Suivi de colis
+              Paiement simplifié
             </h3>
             <div className="w-10 h-1 bg-[#C1121F] mx-auto mt-2"></div>
             <p className="text-left text-[#737373] font-montserrat mt-3 text-sm">
-              Vous pourrez suivre ta commande à tout instant avec le statut du
-              colis mis à jour à chaque étape du trajet !
+              Payez facilement avec Wave ou Orange Money. C'est simple et
+              sécurisé !
             </p>
           </div>
         </div>
       </motion.section>
 
       {/* Validation Section */}
-      <section className="px-4  py-4 bg-[#FFF2F3]">
-        <div className="flex flex-col justify-center h-[450px] md:flex-row items-center gap-12">
-          <div className="md:w-1/2 space-y-6  pb-4">
-            <h2 className="text-5xl leading-[60px] mt-20 font-bold font-jakarta w-[550px] text-[#3F3F46]">
-              Plusieurs commandes sur des sites{" "}
-              <span className="text-[#C1121F]"> diférents</span>? Pas de panique
-              ! <br /> Vouz pouvez{" "}
-              <span className="text-[#C1121F]">Regrouper</span> tes colis en une
-              seule livraison
-              <span className="inline-block ml-1">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="32"
-                  height="32"
-                  viewBox="0 0 32 32"
-                  fill="none"
-                >
-                  <g clipPath="url(#clip0_2252_2394)">
-                    <path
-                      d="M3.55556 4.44434C2.61256 4.44434 1.70819 4.81894 1.0414 5.48573C0.374602 6.15253 0 7.0569 0 7.99989L0 23.9999C0 24.9429 0.374602 25.8473 1.0414 26.514C1.70819 27.1808 2.61256 27.5554 3.55556 27.5554H10.6667V4.44434H3.55556Z"
-                      fill="#00853F"
-                    />
-                    <path
-                      d="M10.6665 4.44434H21.3332V27.5554H10.6665V4.44434Z"
-                      fill="#FDEF42"
-                    />
-                    <path
-                      d="M28.4446 4.44434H21.3335V27.5554H28.4446C29.3876 27.5554 30.292 27.1808 30.9588 26.514C31.6256 25.8473 32.0002 24.9429 32.0002 23.9999V7.99989C32.0002 7.0569 31.6256 6.15253 30.9588 5.48573C30.292 4.81894 29.3876 4.44434 28.4446 4.44434Z"
-                      fill="#E31B23"
-                    />
-                    <path
-                      d="M16.7726 14.8212L16.0001 12.4443L15.2277 14.8212H12.729L14.7503 16.2897L13.9788 18.6666L16.0001 17.1981L18.0214 18.6666L17.2499 16.2897L19.2712 14.8212H16.7726Z"
-                      fill="#00853F"
-                    />
-                  </g>
-                  <defs>
-                    <clipPath id="clip0_2252_2394">
-                      <rect width="32" height="32" fill="white" />
-                    </clipPath>
-                  </defs>
-                </svg>
-              </span>
-            </h2>
-            <p className="text-[#606065] w-[550px] font-normal font-jakarta text-base ">
-              Avec nos options 'Blocage panier' et 'Regroupement colis', rien de
-              plus simple ! <span className="text-[#C1121F]">Bloque</span> ta
-              commande dès la reception en entrepôt puis{" "}
-              <span className="text-[#C1121F]">Regroupez</span> tous vos colis
+      <section className="px-4 py-4 bg-[#FFF2F3]">
+        <div className="flex flex-col justify-center md:h-[450px] md:flex-row items-center gap-12">
+          <div className="w-3/4 md:w-1/2 space-y-6 pb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight md:leading-[60px] mt-10 md:mt-20 font-bold font-jakarta w-full md:w-[550px] text-[#3F3F46]">
+              Plusieurs commandes sur différents sites ?
               <br />
-              en une seule livraison au Sénégal{" "}
+              Pas de panique !
+              <br />
+              Regroupez tout en une seule livraison.
+            </h2>
+            <p className="text-[#606065] md:w-[550px] font-normal font-jakarta text-base">
+              Avec nos fonctionnalités "Blocage panier" et "Regroupement colis",
+              <br />
+              Vous pouvez bloquer vos colis dans nos entrepôts et choisir de
+              recevoir tous vos colis en une seule livraison au Sénégal.
+              <br />
+              <span className="font-bold text-[#C1121F]">
+                Pratique, économique et rapide !
+              </span>
             </p>
             <button className="bg-[#C1121F] text-white px-8 py-3 rounded-lg hover:bg-red-700 inline-flex items-center gap-2">
               J&apos;ouvre mon compte
             </button>
           </div>
-          <div className="md:w-1/3 pt-16 ">
-            <div className="bg-pink-50 rounded-3xl  ">
+          <div className="md:w-1/3 pt-16">
+            <div className="bg-pink-50 rounded-3xl">
               <Image
                 src="/lady.png"
                 alt="Woman using phone"
@@ -469,170 +461,61 @@ export default function Home() {
 
       {/* Advantages Section */}
       <section id="advantages" className="px-4 py-16 bg-[#FFF8F8]">
-        <div className="text-center  max-w-3xl mx-auto mb-16">
-          <h2 className="font-jakarta text-5xl font-bold mb-4">
-            Découvrez les avantages
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-jakarta font-bold mb-4">
+            Découvrez les avantages Yabalma
           </h2>
-          <p className="text-gray-600 ">
-            Yabalma est là pour te faciliter le processus de commande sur tes
-            sites de E-commerce internationaux depuis l'Afrique. L'appli est
-            spécifiquement pensée pour toi !
+          <p className="text-gray-600">
+            Une gestion simple et optimisée de vos commandes
           </p>
         </div>
 
-        <div className="flex justify-center items-center w-full mt-8">
-          <div className="flex justify-between w-[90%] space-x-4   ">
-            <div
-              className={`transition-all duration-700 mt-24 w-[20%] rounded-xl bg-[#f9e7e9] ${
-                isVisible ? "animate-float-up" : "opacity-0"
-              }`}
-            >
-              <Image
-                src="/hom.png"
-                alt="Validation automatique"
-                width={220}
-                height={220}
-                className="rounded-xl relative bottom-11   mx-auto"
-              />
-              <div className="flex items-center bottom-0 absolute p-3  bg-white  pb-4 gap-4 ">
-                <div className="  rounded-lg">
-                  <ShoppingBasket className="w-6 h-6 text-[#C1121F]" />
-                </div>
-                <div>
-                  <h3 className="text-sm font-medium font-jakarta w-[215px] text-[#1F2937]  ">
-                    Valide automatiquement un panier Shein ou Temu en utilisant
-                    ton lien de panier.
-                  </h3>
-                </div>
-              </div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+          <div className="bg-white p-6 rounded-xl shadow-lg">
+            <div className="w-12 h-12 bg-[#C1121F] rounded-full flex items-center justify-center mb-4">
+              <MapPinCheckInside className="text-white" size={24} />
             </div>
-            <div
-              className={`transition-all rounded-xl bg-[#C1121F] w-[20%]  duration-700 delay-200 ${
-                isVisible ? "animate-float-down" : "opacity-0"
-              }`}
-            >
-              <Image
-                src="/pay-removebg.png"
-                alt="Regroupement de commandes"
-                width={220}
-                height={220}
-                className="rounded-xl relative bottom-11   mx-auto"
-              />
-              <div className="flex  flex-col bottom-0 absolute p-3  bg-white  pb-32 gap-2">
-                <div className="rounded-lg">
-                  <Banknote className="w-6 h-6 text-[#C1121F]" />
-                </div>
-                <div>
-                  <h3 className="text-sm font-medium font-jakarta w-[215px] text-[#1F2937]  ">
-                    Paie directement avec ton mobile money local
-                  </h3>
-                </div>
-              </div>
-            </div>
-            <div
-              className={`transition-all rounded-xl duration-700 mt-24 w-[20%]   bg-[#f9e7e9] delay-400 ${
-                isVisible ? "animate-float-down" : "opacity-0"
-              }`}
-            >
-              <Image
-                src="/liv.jpg"
-                alt="Paiement mobile"
-                width={220}
-                height={220}
-                className="rounded-xl relative bottom-11   mx-auto"
-              />
-              <div className="flex flex-col items-start bottom-0 absolute p-3  bg-white  pb-16 gap-2">
-                <div className="rounded-lg">
-                  <Truck className="w-6 h-6 text-[#C1121F]" />
-                </div>
-                <div>
-                  <h3 className="text-sm font-medium font-jakarta w-[215px] text-[#1F2937]  ">
-                    Choisis ton transporteur de confiance
-                  </h3>
-                </div>
-              </div>
-            </div>
-
-            <div
-              className={`transition-all rounded-xl bg-[#C1121F] w-[20%]  duration-700 delay-200 ${
-                isVisible ? "animate-float-down" : "opacity-0"
-              }`}
-            >
-              <Image
-                src="/colis.png"
-                alt="Regroupement de commandes"
-                width={220}
-                height={220}
-                className="rounded-xl relative bottom-11   mx-auto"
-              />
-              <div className="flex items-center bottom-0 absolute p-3  bg-white  pb-32 gap-4">
-                <div className="rounded-lg">
-                  <List className="w-6 h-6 text-[#C1121F]" />
-                </div>
-                <div>
-                  <h3 className="text-sm font-medium font-jakarta w-[215px] text-[#1F2937]  ">
-                    Regroupe tes différentes commandes en une seule livraison
-                    rapide et peu chère
-                  </h3>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Delivery Service Section */}
-      <section className="bg-[url('/back.png')] bg-cover bg-center px-4 md:px-24 py-8 relative">
-        <div className="flex flex-col md:flex-row items-center gap-12">
-          <div className="md:w-[600px] text-white pt-16 space-y-6 ">
-            <h2 className="text-5xl font-bold w-[600px] font-jakarta leading-[60px] ">
-              Un service de livraison par GP bientôt disponible!
-            </h2>
-            <p className="text-[#ffffff] font-jakarta font-normal text-base leading-6">
-              Envoie et réception de tes colis entre l'Afrique et le reste du
-              monde à moindre coût ! Suivi de ton colis du départ jusqu'à la
-              livraison.
+            <h3 className="text-lg font-semibold mb-2">Suivi en temps réel</h3>
+            <p className="text-gray-600">
+              Recevez des notifications à chaque étape de la livraison.
             </p>
-            <div className="flex flex-col sm:flex-row sm:space-x-2 gap-4">
-              <div className="bg-white p-3 rounded-lg shadow-md flex flex-col gap-1">
-                <div className="flex justify-between items-center">
-                  <h3 className="font-bold  text-black font-jakarta text-[22px] leading-7">
-                    Trouve un GP
-                  </h3>
-                  <span className="text-black  font-boldfont-jakarta text-[22px] leading-7">
-                    ↗
-                  </span>
-                </div>
-                <p className="text-[#606065] text-base font-jakarta font-normal leading-6">
-                  Trouve un Gp proche de chez toi
-                </p>
-              </div>
-
-              <div className="bg-white p-3 rounded-lg shadow-md flex flex-col gap-1">
-                <div className="flex justify-between items-center">
-                  <h3 className="font-bold  text-black font-jakarta text-[22px] leading-7">
-                    Livraison colis
-                  </h3>
-                  <span className="text-black  font-boldfont-jakarta text-[22px] leading-7">
-                    ↗
-                  </span>
-                </div>
-                <p className="text-[#606065] text-base font-jakarta font-normal leading-6">
-                  Suis toutes les étapes de ton colis jusqu'à la livraison
-                </p>
-              </div>
-            </div>
           </div>
-          <div className="md:w-1/2 relative top-8">
-            <div className="top-5">
-              <Image
-                src="/Group 1.png"
-                alt="Mobile App Interface"
-                width={600}
-                height={845}
-                className="rounded-3xl to  mx-auto"
-              />
+
+          <div className="bg-white p-6 rounded-xl shadow-lg">
+            <div className="w-12 h-12 bg-[#C1121F] rounded-full flex items-center justify-center mb-4">
+              <Smartphone className="text-white" size={24} />
             </div>
+            <h3 className="text-lg font-semibold mb-2">
+              Service client 24h/24 – 7j/7
+            </h3>
+            <p className="text-gray-600">
+              Une équipe à votre écoute à tout moment.
+            </p>
+          </div>
+
+          <div className="bg-white p-6 rounded-xl shadow-lg">
+            <div className="w-12 h-12 bg-[#C1121F] rounded-full flex items-center justify-center mb-4">
+              <List className="text-white" size={24} />
+            </div>
+            <h3 className="text-lg font-semibold mb-2">
+              Regroupement de colis
+            </h3>
+            <p className="text-gray-600">
+              Plus de colis éparpillés, une seule livraison.
+            </p>
+          </div>
+
+          <div className="bg-white p-6 rounded-xl shadow-lg">
+            <div className="w-12 h-12 bg-[#C1121F] rounded-full flex items-center justify-center mb-4">
+              <Star className="text-white" size={24} />
+            </div>
+            <h3 className="text-lg font-semibold mb-2">
+              Application fluide et performante
+            </h3>
+            <p className="text-gray-600">
+              Des mises à jour régulières pour une meilleure expérience
+              utilisateur.
+            </p>
           </div>
         </div>
       </section>
@@ -642,7 +525,7 @@ export default function Home() {
         id="about"
         className="bg-[url('/terre.png')] bg-cover bg-center px-4 md:px-24 py-8 mt-10"
       >
-        <div className="flex flex-col md:flex-row  gap-12">
+        <div className="flex flex-col md:flex-row gap-12">
           <div className="md:w-1/2">
             <div className="">
               <Image
@@ -655,8 +538,8 @@ export default function Home() {
             </div>
           </div>
           <div className="md:w-1/2 space-y-6 mt-10">
-            <h2 className="text-4xl font-bold">
-              Les personnes derrières Yabalma
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">
+              L'équipe derrière Yabalma
             </h2>
             <div className="space-y-4">
               {/* Who We Are Accordion */}
@@ -674,18 +557,32 @@ export default function Home() {
                 </button>
                 {openAccordion === "who" && (
                   <div className="px-6 pb-4">
-                    Yabalma est le fruit de l’imagination de deux sœurs
-                    ambitieuses, Fama et Ami, qui ont toujours été animées par
-                    l’esprit entrepreneurial, l’innovation et le business. Mais
-                    ce projet n’aurait pas pu voir le jour sans l’implication et
-                    le travail acharné d’une équipe passionnée. Développeurs,
-                    designers, professionnels du transport de colis vers
-                    l’Afrique, chacun a apporté son expertise pour construire
-                    une plateforme intuitive, sécurisée et adaptée aux besoins
-                    des utilisateurs. Grâce à cette collaboration dynamique,
-                    Yabalma est aujourd’hui bien plus qu’une application : c’est
-                    une solution révolutionnaire qui simplifie les achats en
-                    ligne et le transport vers le Sénégal.
+                    <p className="text-gray-600">
+                      Yabalma, c'est d'abord une histoire de famille, de rêve et
+                      de détermination.
+                      <br />
+                      <br />
+                      Nées d'une même vision, Fama et Ami, deux sœurs animées
+                      par l'esprit entrepreneurial et un profond désir de
+                      changement, ont voulu répondre à un besoin simple : rendre
+                      le e-commerce mondial accessible, fiable et fluide pour
+                      tous, depuis l'Afrique.
+                      <br />
+                      <br />
+                      Mais cette aventure n'aurait jamais vu le jour sans une
+                      équipe tout aussi passionnée. Développeurs, designers,
+                      logisticiens… chacun a mis son cœur et son savoir-faire au
+                      service d'un même objectif : créer une application
+                      intuitive, sécurisée et pensée pour les vrais besoins des
+                      utilisateurs.
+                      <br />
+                      <br />
+                      Yabalma, c'est bien plus qu'une application. C'est un
+                      projet né de liens humains, porté par une volonté commune
+                      d'ouvrir le monde, colis après colis. C'est une solution
+                      bâtie avec le cœur, pour connecter les envies d'ici avec
+                      les opportunités d'ailleurs.
+                    </p>
                   </div>
                 )}
               </div>
@@ -707,24 +604,29 @@ export default function Home() {
                   <div className="px-6 pb-4">
                     <p className="text-gray-600">
                       <span className="text-[#C1121F] font-bold">
-                        {" "}
-                        Innovation{" "}
-                      </span>{" "}
-                      : Parce que nous repoussons les limites du secteur
-                      numérique et logistique pour créer des solutions toujours
-                      plus efficaces et modernes. <br />{" "}
+                        🚀 Innovation
+                      </span>
+                      <br />
+                      Nous bousculons les codes du digital et de la logistique
+                      pour vous offrir des solutions toujours plus
+                      intelligentes.
+                      <br />
+                      <br />
                       <span className="text-[#C1121F] font-bold">
-                        Intraprenariat
-                      </span>{" "}
-                      : Nous croyons en la capacité et au génie de chaque
-                      collaborateur chez Yabalma. Chaque acteur est autonome et
-                      force de proposition. <br />{" "}
+                        💼 Intrapreneuriat
+                      </span>
+                      <br />
+                      Chez Yabalma, chaque membre de l'équipe est un moteur
+                      d'idées. Autonomie, initiative et esprit d'entrepreneur
+                      guident notre croissance.
+                      <br />
+                      <br />
                       <span className="text-[#C1121F] font-bold">
-                        Intraprenariat
-                      </span>{" "}
-                      : La confiance est au cœur de tout ce que nous faisons.
-                      Notre optique est la fiabilité de nos collations à tous
-                      les niveaux.
+                        🤝 Confiance
+                      </span>
+                      <br />
+                      Notre optique est la fiabilité de nos collaborations à
+                      tous les niveaux.
                     </p>
                   </div>
                 )}
@@ -746,9 +648,9 @@ export default function Home() {
                 {openAccordion === "vision" && (
                   <div className="px-6 pb-4">
                     <p className="text-gray-600">
-                      Devenir le leader de la logistique de colis vers l'Afrique
-                      en offrant une solution complète et adaptée aux
-                      consommateurs pour leurs achats en ligne internationaux.
+                      Devenir le leader de la logistique e-commerce vers
+                      l'Afrique, en proposant une solution complète, accessible
+                      et adaptée aux besoins réels des consommateurs.
                     </p>
                   </div>
                 )}
@@ -758,103 +660,56 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <motion.div
-        id="testimonials"
-        className="w-full max-w-7xl mx-auto px-4 py-12"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
-      >
-        <div className="text-center mb-12">
-          <h2 className="text-5xl  font-bold font-jakarta text-[#3F3F46] mb-4">
-            Témoignage de réussite de clients
-          </h2>
-          <p className="text-[#606065] max-w-2xl mx-auto"></p>
-        </div>
-
-        <Carousel
-          setApi={setApi}
-          opts={{ loop: true }}
-          plugins={[Autoplay({ delay: 2000 })]}
-          className="w-full"
-        >
-          <CarouselContent>
-            {testimonials.map((testimonial, index) => (
-              <CarouselItem key={index} className="md:basis-1/1 lg:basis-1/3 ">
-                <Card className="bg-[#C1121F] font-jakarta text-white rounded-3xl h-full rounded-tl-[12px] rounded-tr-[90px] rounded-bl-[90px] rounded-br-[12px] ">
-                  <CardContent className="p-6 flex flex-col h-full ">
-                    <StarRating rating={testimonial.rating} />
-                    <p className="mt-4 flex-grow pl-2">{testimonial.content}</p>
-                    <div className="flex items-center pl-2 gap-3 mt-6 ">
-                      <Avatar>
-                        <AvatarFallback className="bg-white text-red-600">
-                          {testimonial.initials}
-                        </AvatarFallback>
-                      </Avatar>
-                      <div>
-                        <p className="font-semibold">{testimonial.name}</p>
-                        <p className="text-sm opacity-90">{testimonial.role}</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious className="text-red-600 border-red-600 hover:bg-red-100" />
-          <CarouselNext className="text-red-600 border-red-600 hover:bg-red-100" />
-        </Carousel>
-
-        <div className="flex justify-center gap-2 mt-8">
-          {[...Array(count)].map((_, i) => (
-            <button
-              key={i}
-              className={`h-2 rounded-full transition-all ${
-                i === current ? "w-4 bg-red-600" : "w-2 bg-gray-300"
-              }`}
-              onClick={() => api?.scrollTo(i)}
-            />
-          ))}
-        </div>
-      </motion.div>
+      {/* Final Section */}
       <section className="bg-[#C1121F] md:flex md:flex-row text-white py-16 px-4 md:px-12 flex flex-col items-center">
-        <div className="md:w-1/2">
-          <h1 className="text-5xl leading-[60px] w-full  font-bold  mb-4">
-            Que vous soyez transporteur ou particulier, Yabalma est là pour toi
-            !
+        <div className="w-3/4 md:w-1/2">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight md:leading-[60px] w-full font-bold mb-4">
+            Qu'attendez-vous ? Rejoignez-nous !
           </h1>
-          <p className="text-left w-[500px] font-jakarta text-white-300/90 font-normal text-base leading-6 mb-8">
-            Particulier ? Télécharge l’application et fais ton shopping sans
-            frontière ! <br />
-            Transporteur ? Publie tes trajets, trouve des clients facilement et
-            développe ton activité ! <br />
-            Avec Yabalma, nous bâtissons un pont entre l'innovation,
-            l’entrepreneuriat et la confiance pour vous offrir le meilleur
-            service possible. <br /> <br /> <br />
+          <p className="text-left md:w-[500px] font-jakarta text-white-300/90 font-normal text-base leading-6 mb-8">
+            Téléchargez Yabalma dès maintenant et découvrez une nouvelle façon
+            de commander en ligne.
+            <br />
+            <br />
+            Yabalma, votre passerelle simple, fiable et rapide vers le
+            e-commerce mondial.
+            <br />
+            <br />
+            <span className="font-bold text-2xl">Shoppez sans frontière</span>
           </p>
-          <p className="text-left w-[500px] font-jakarta text-white-300/90 font-bold text-base leading-6 mb-8">
-            Télécharge vite l'application !
-          </p>
-          <div className="flex space-x-4">
-            <a href="#" className="">
+          <div className="flex flex-col items-start gap-6">
+            <div className="flex space-x-4">
+              <a href="#" className="">
+                <Image
+                  src="/appstore.png"
+                  alt="App Store"
+                  width={132}
+                  height={49}
+                  className="mr-2"
+                />
+              </a>
+              <a href="#" className="">
+                <Image
+                  src="/playstore.png"
+                  alt="Google Play"
+                  width={132}
+                  height={49}
+                  className="mr-2"
+                />
+              </a>
+            </div>
+            <div className="bg-white p-4 rounded-lg">
               <Image
-                src="/appstore.png"
-                alt="App Store"
-                width={132}
-                height={49}
-                className=" mr-2"
+                src="/qr-code.png"
+                alt="QR Code Yabalma"
+                width={150}
+                height={150}
+                className=""
               />
-            </a>
-            <a href="#" className="">
-              <Image
-                src="/playstore.png"
-                alt="Google Play"
-                width={132}
-                height={49}
-                className=" mr-2"
-              />
-            </a>
+              <p className="text-[#C1121F] text-center mt-2 font-semibold">
+                Scannez pour télécharger
+              </p>
+            </div>
           </div>
         </div>
         <div className="md:w-2/3">
@@ -863,7 +718,7 @@ export default function Home() {
             alt="Yabalma App"
             width={600}
             height={547}
-            className="rounded-3xl to  mx-auto"
+            className="rounded-3xl mx-auto"
           />
         </div>
       </section>
@@ -885,7 +740,7 @@ export default function Home() {
               className="mr-2"
             />
             <p className="text-[#3F3F46] font-inter font-normal text-base leading-6">
-              Shoppez sans frontière !{" "}
+              Shoppez sans frontière !
             </p>
           </div>
           <div>
@@ -910,7 +765,7 @@ export default function Home() {
               <li>
                 <a
                   href="#"
-                  className="hover:text-[#C112 1F] text-[#3F3F46] font-inter font-medium text-base leading-6"
+                  className="hover:text-[#C1121F] text-[#3F3F46] font-inter font-medium text-base leading-6"
                 >
                   Contact
                 </a>
@@ -968,7 +823,7 @@ export default function Home() {
               <li>
                 <a
                   href="#"
-                  className="hover:text-[#C1121F] text-[#3F3F46] font-inter font-medium text-base leading-6 "
+                  className="hover:text-[#C1121F] text-[#3F3F46] font-inter font-medium text-base leading-6"
                 >
                   Conditions d'utilisation
                 </a>
@@ -995,7 +850,7 @@ export default function Home() {
             <h4 className="font-semibold font-jakarta text-[#2C2C31] text-[21px] mb-4">
               Télécharger Yabalma
             </h4>
-            <div className="flex flex-col justify-start items-start gap-4 ">
+            <div className="flex flex-col justify-start items-start gap-4">
               <Image
                 src="/Footerlink.png"
                 alt="App Store"
@@ -1024,7 +879,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="mt-8 flex justify-between  text-center text-[#2C2C31]">
+        <div className="mt-8 flex justify-between text-center text-[#2C2C31]">
           <div>© {new Date().getFullYear()} Yabalma. Tous droits réservés.</div>
           <div>
             <p>
@@ -1056,13 +911,13 @@ export default function Home() {
         strategy="lazyOnload"
         dangerouslySetInnerHTML={{
           __html: `
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){dataLayer.push(arguments);}
-                    gtag('js', new Date());
-                    gtag('config', 'G-776GFX2GWG', {
-                        page_path: window.location.pathname,
-                    });
-                `,
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-776GFX2GWG', {
+              page_path: window.location.pathname,
+            });
+          `,
         }}
       />
     </motion.div>

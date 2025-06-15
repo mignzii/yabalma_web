@@ -1,0 +1,58 @@
+/* Styles responsifs pour les titres */
+.hero-title {
+  font-size: 1.5rem; /* text-2xl */
+  line-height: 1.25;
+}
+
+.section-title {
+  font-size: 1.5rem; /* text-2xl */
+  line-height: 1.25;
+}
+
+.subtitle {
+  font-size: 1rem; /* text-base */
+}
+
+/* Media queries pour les écrans plus grands */
+@media (min-width: 640px) {
+  .hero-title {
+    font-size: 1.875rem; /* text-3xl */
+  }
+
+  .section-title {
+    font-size: 1.875rem; /* text-3xl */
+  }
+
+  .subtitle {
+    font-size: 1.125rem; /* text-lg */
+  }
+}
+
+@media (min-width: 768px) {
+  .hero-title {
+    font-size: 2.25rem; /* text-4xl */
+    line-height: 1.5;
+  }
+
+  .section-title {
+    font-size: 2.25rem; /* text-4xl */
+  }
+
+  .subtitle {
+    font-size: 1.25rem; /* text-xl */
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-title {
+    font-size: 3rem; /* text-5xl */
+  }
+
+  .section-title {
+    font-size: 3rem; /* text-5xl */
+  }
+
+  .subtitle {
+    font-size: 1.5rem; /* text-2xl */
+  }
+}
