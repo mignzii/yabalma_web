@@ -29,11 +29,25 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { testimonials } from "../data/testimonials";
 import Autoplay from "embla-carousel-autoplay";
 import { motion } from "framer-motion";
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { useRef } from "react";
+import ConditionsUtilisation from "./legal/conditions-utilisation";
+import MentionsLegales from "./legal/mentions-legales";
 
 export default function Home() {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [openAccordion, setOpenAccordion] = useState<string | null>("who");
   const [isVisible, setIsVisible] = useState(false);
+  const [openCGU, setOpenCGU] = useState(false);
+  const [openMentions, setOpenMentions] = useState(false);
+  const [showNavbar, setShowNavbar] = useState(true);
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -48,6 +62,27 @@ export default function Home() {
     window.addEventListener("scroll", handleScroll);
     handleScroll();
 
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY < 50) {
+        setShowNavbar(true);
+        lastScrollY.current = window.scrollY;
+        return;
+      }
+      if (window.scrollY > lastScrollY.current) {
+        // On descend
+        setShowNavbar(false);
+      } else {
+        // On monte
+        setShowNavbar(true);
+      }
+      lastScrollY.current = window.scrollY;
+    };
+
+    window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -100,6 +135,32 @@ export default function Home() {
     setOpenAccordion(openAccordion === id ? null : id);
   };
 
+  // Tableau des réseaux sociaux
+  const socialLinks = [
+    {
+      name: "Facebook",
+      url: "https://www.facebook.com/share/16WFPvS6e9/?mibextid=wwXIfr",
+      icon: "/facebook.png",
+    },
+    {
+      name: "Instagram",
+      url: "https://www.instagram.com/yabalma_?igsh=MTBhZ212M3h2YmN1Mg==",
+      icon: "/instagram.png",
+    },
+    { name: "X", url: "https://x.com/yabalma_?s=11", icon: "/x.png" },
+    {
+      name: "Linkedin",
+      url: "https://www.linkedin.com/company/yabalma/",
+      icon: "/link.png",
+    },
+    { name: "Tiktok", url: "https://www.tiktok.com/@yabalma_?_t=ZN-8xiaYIjdtME&_r=1", icon: "/tiktok.png" },
+  ];
+
+  // Pour le smooth scroll
+  useEffect(() => {
+    document.documentElement.style.scrollBehavior = "smooth";
+  }, []);
+
   return (
     <motion.div
       className="min-h-screen"
@@ -109,7 +170,9 @@ export default function Home() {
     >
       {/* Navigation */}
       <motion.nav
-        className="flex items-center justify-between p-4 md:p-4 bg-[#FFFFFF]"
+        className={`flex items-center justify-between p-4 md:p-4 bg-[#FFFFFF] transition-all duration-300 ${
+          showNavbar ? "opacity-100 h-auto" : "opacity-0 h-0 overflow-hidden"
+        }`}
         initial={{ y: -20 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5 }}
@@ -137,10 +200,16 @@ export default function Home() {
             NOS SERVICES
           </a>
           <a
-            href="#testimonials"
+            href="#advantages"
             className="hover:text-[#C1121F] text-sm text-[#2C2C31] font-bold"
           >
-            TÉMOIGNAGES
+            AVANTAGES
+          </a>
+          <a
+            href="#equipe"
+            className="hover:text-[#C1121F] text-sm text-[#2C2C31] font-bold"
+          >
+            ÉQUIPE
           </a>
           <a
             href="#contact"
@@ -421,7 +490,13 @@ export default function Home() {
       </motion.section>
 
       {/* Validation Section */}
-      <section className="px-4 py-4 bg-[#FFF2F3]">
+      <motion.section
+        id="validation"
+        className="px-4 py-4 bg-[#FFF2F3]"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
         <div className="flex flex-col justify-center md:h-[450px] md:flex-row items-center gap-12">
           <div className="w-3/4 md:w-1/2 space-y-6 pb-4">
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight md:leading-[60px] mt-10 md:mt-20 font-bold font-jakarta w-full md:w-[550px] text-[#3F3F46]">
@@ -457,7 +532,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Advantages Section */}
       <section id="advantages" className="px-4 py-16 bg-[#FFF8F8]">
@@ -521,8 +596,8 @@ export default function Home() {
       </section>
 
       {/* Team Section */}
-      <section
-        id="about"
+      <motion.section
+        id="equipe"
         className="bg-[url('/terre.png')] bg-cover bg-center px-4 md:px-24 py-8 mt-10"
       >
         <div className="flex flex-col md:flex-row gap-12">
@@ -658,10 +733,15 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Final Section */}
-      <section className="bg-[#C1121F] md:flex md:flex-row text-white py-16 px-4 md:px-12 flex flex-col items-center">
+      <motion.section
+        className="bg-[#C1121F] md:flex md:flex-row text-white py-16 px-4 md:px-12 flex flex-col items-center"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
         <div className="w-3/4 md:w-1/2">
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight md:leading-[60px] w-full font-bold mb-4">
             Qu'attendez-vous ? Rejoignez-nous !
@@ -721,10 +801,11 @@ export default function Home() {
             className="rounded-3xl mx-auto"
           />
         </div>
-      </section>
+      </motion.section>
 
       {/* Footer */}
       <motion.footer
+        id="contact"
         className="bg-white text-black font-inter px-4 md:px-12 py-12"
         initial={{ y: 50 }}
         animate={{ y: 0 }}
@@ -748,7 +829,7 @@ export default function Home() {
             <ul className="space-y-2">
               <li>
                 <a
-                  href="#"
+                  href="#services"
                   className="hover:text-[#C1121F] text-[#3F3F46] font-inter font-medium text-base leading-6"
                 >
                   Nos services
@@ -764,7 +845,7 @@ export default function Home() {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="#contact"
                   className="hover:text-[#C1121F] text-[#3F3F46] font-inter font-medium text-base leading-6"
                 >
                   Contact
@@ -775,74 +856,44 @@ export default function Home() {
           <div>
             <h4 className="font-semibold mb-4">Social</h4>
             <ul className="space-y-2">
-              <li>
-                <a
-                  href="#"
-                  className="hover:text-[#C1121F] text-[#3F3F46] font-inter font-medium text-base leading-6"
-                >
-                  Facebook
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="hover:text-[#C1121F] text-[#3F3F46] font-inter font-medium text-base leading-6"
-                >
-                  Instagram
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="hover:text-[#C1121F] text-[#3F3F46] font-inter font-medium text-base leading-6"
-                >
-                  Twitter
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="hover:text-[#C1121F] text-[#3F3F46] font-inter font-medium text-base leading-6"
-                >
-                  Linkedin
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="hover:text-[#C1121F] text-[#3F3F46] font-inter font-medium text-base leading-6"
-                >
-                  Tiktok
-                </a>
-              </li>
+              {socialLinks.map((item) => (
+                <li key={item.name}>
+                  <a
+                    href={item.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-[#C1121F] text-[#3F3F46] font-inter font-medium text-base leading-6 flex items-center gap-2"
+                  >
+                    <Image
+                      src={item.icon}
+                      alt={item.name}
+                      width={20}
+                      height={20}
+                    />
+                    {item.name}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
           <div>
             <h4 className="font-semibold mb-4">Légal</h4>
             <ul className="space-y-2">
               <li>
-                <a
-                  href="#"
-                  className="hover:text-[#C1121F] text-[#3F3F46] font-inter font-medium text-base leading-6"
+                <button
+                  onClick={() => setOpenCGU(true)}
+                  className="hover:text-[#C1121F] text-[#3F3F46] font-inter font-medium text-base leading-6 bg-transparent border-none cursor-pointer p-0"
                 >
                   Conditions d'utilisation
-                </a>
+                </button>
               </li>
               <li>
-                <a
-                  href="#"
-                  className="hover:text-[#C1121F] text-[#3F3F46] font-inter font-medium text-base leading-6"
-                >
-                  Politique de confidentialité
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="hover:text-[#C1121F] text-[#3F3F46] font-inter font-medium text-base leading-6"
+                <button
+                  onClick={() => setOpenMentions(true)}
+                  className="hover:text-[#C1121F] text-[#3F3F46] font-inter font-medium text-base leading-6 bg-transparent border-none cursor-pointer p-0"
                 >
                   Mentions légales
-                </a>
+                </button>
               </li>
             </ul>
           </div>
@@ -879,28 +930,43 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="mt-8 flex justify-between text-center text-[#2C2C31]">
+        <div className="mt-8 flex justify-between text-center text-[#2C2C31] flex-wrap gap-4">
           <div>© {new Date().getFullYear()} Yabalma. Tous droits réservés.</div>
-          <div>
-            <p>
+          <div className="flex gap-4 justify-center items-center">
+            {socialLinks.map((item) => (
               <a
-                href="#"
-                className="hover:text-[#C1121F] text-[#3F3F46] font-inter flex gap-2 font-medium text-base leading-6"
+                key={item.name}
+                href={item.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:opacity-80"
               >
-                <Image src="./x.png" alt="Facebook" width={20} height={20} />
-                <Image
-                  src="./facebook.png"
-                  alt="Facebook"
-                  width={20}
-                  height={20}
-                />
-                <Instagram className="w-6 h-6" />
-                <Image src="./link.png" alt="Facebook" width={20} height={20} />
+                <Image src={item.icon} alt={item.name} width={28} height={28} />
               </a>
-            </p>
+            ))}
           </div>
         </div>
       </motion.footer>
+
+      {/* Modaux CGU et Mentions légales */}
+      <Dialog open={openCGU} onOpenChange={setOpenCGU}>
+        <DialogContent className="max-h-[80vh] md:min-w-[50vw] overflow-y-auto">
+         
+          <div className="text-sm text-gray-700 whitespace-pre-line">
+            {ConditionsUtilisation()}
+          </div>
+        </DialogContent>
+      </Dialog>
+      <Dialog open={openMentions} onOpenChange={setOpenMentions}>
+        <DialogContent className="max-h-[80vh] md:min-w-[50vw] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle>Mentions légales</DialogTitle>
+          </DialogHeader>
+          <div className="text-sm text-gray-700 whitespace-pre-line">
+            {MentionsLegales()}
+          </div>
+        </DialogContent>
+      </Dialog>
 
       <Script
         async
