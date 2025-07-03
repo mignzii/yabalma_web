@@ -133,12 +133,9 @@ const PhoneVideoCarousel = ({ videos }: { videos: string[] }) => {
       className="relative w-[300px] h-[600px] mx-auto bg-black rounded-[40px] border-[7px] border-red-700 shadow-xl flex items-center justify-center"
     >
       {/* Écran du téléphone */}
-      <video
-        ref={videoRef}
+      <iframe
         src={videos[current]}
-        controls
-        playsInline
-        className="w-[98%] h-[99%] object-cover rounded-[30px]"
+        className="w-[96%] h-[97%] object-cover rounded-[30px]"
       />
     </div>
   );
@@ -156,9 +153,9 @@ export default function Home() {
 
   // Vidéos à afficher dans la section équipe
   const videoPaths = [
-    "/videos/IMG_8165.MP4",
-    "/videos/IMG_8166.MP4",
-    "/videos/IMG_8167.MP4",
+    "https://drive.google.com/file/d/1dEgqAbR39lhSAoXKcl7-krnlULk15Zz1/view?usp=drive_link",
+    "https://drive.google.com/file/d/1Y_WcKygqIXTszLye03xA0CEKoEK-sDei/view?usp=drive_link",
+    "https://drive.google.com/file/d/1qUH4Rwk686fe9rZNoWmiXnXo_JTuGgEz/view?usp=drive_link",
   ];
 
   useEffect(() => {
