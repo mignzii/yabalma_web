@@ -224,12 +224,6 @@ const MentionsLegales = () => {
               <div className="space-y-2">
                 <div className="flex items-center space-x-2 text-blue-600 hover:text-blue-700">
                   <Mail className="w-4 h-4 flex-shrink-0" />
-                  <a href="mailto:YabalmaInternational@gmail.com" className="underline text-sm sm:text-base break-all">
-                    YabalmaInternational@gmail.com
-                  </a>
-                </div>
-                <div className="flex items-center space-x-2 text-blue-600 hover:text-blue-700">
-                  <Mail className="w-4 h-4 flex-shrink-0" />
                   <a href="mailto:support@yabalma.com" className="underline text-sm sm:text-base break-all">
                     support@yabalma.com
                   </a>

@@ -40,14 +40,126 @@ import { useRef } from "react";
 import ConditionsUtilisation from "./legal/conditions-utilisation";
 import MentionsLegales from "./legal/mentions-legales";
 
+// Composant vidéo qui se lance à l'apparition dans le viewport
+const VideoOnScroll = ({ src }: { src: string }) => {
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            video.play().catch(() => {});
+          } else {
+            video.pause();
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    observer.observe(video);
+
+    return () => {
+      observer.unobserve(video);
+    };
+  }, []);
+
+  return (
+    <video
+      ref={videoRef}
+      src={src}
+      muted
+      loop
+      playsInline
+      className="rounded-xl w-full h-auto"
+    />
+  );
+};
+
+// Composant téléphone qui affiche une seule "coque" et fait défiler les vidéos les unes après les autres
+const PhoneVideoCarousel = ({ videos }: { videos: string[] }) => {
+  const [current, setCurrent] = useState(0);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+
+  // Passer à la vidéo suivante quand la vidéo courante se termine
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    const handleEnded = () => {
+      setCurrent((prev) => (prev + 1) % videos.length);
+    };
+    video.addEventListener("ended", handleEnded);
+    return () => video.removeEventListener("ended", handleEnded);
+  }, [videos, current]);
+
+  // Recharger la nouvelle source et démarrer la lecture
+  useEffect(() => {
+    const video = videoRef.current;
+    if (video) {
+      video.load();
+      video.play().catch(() => {});
+    }
+  }, [current]);
+
+  // Jouer / pause selon la visibilité
+  useEffect(() => {
+    const container = containerRef.current;
+    const video = videoRef.current;
+    if (!container || !video) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            video.play().catch(() => {});
+          } else {
+            video.pause();
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+    observer.observe(container);
+    return () => observer.unobserve(container);
+  }, []);
+
+  return (
+    <div
+      ref={containerRef}
+      className="relative w-[300px] h-[600px] mx-auto bg-black rounded-[40px] border-[7px] border-red-700 shadow-xl flex items-center justify-center"
+    >
+      {/* Écran du téléphone */}
+      <video
+        ref={videoRef}
+        src={videos[current]}
+        controls
+        playsInline
+        className="w-[98%] h-[99%] object-cover rounded-[30px]"
+      />
+    </div>
+  );
+};
+
 export default function Home() {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [openAccordion, setOpenAccordion] = useState<string | null>("who");
   const [isVisible, setIsVisible] = useState(false);
   const [openCGU, setOpenCGU] = useState(false);
   const [openMentions, setOpenMentions] = useState(false);
+  const [openContact, setOpenContact] = useState(false);
   const [showNavbar, setShowNavbar] = useState(true);
   const lastScrollY = useRef(0);
+
+  // Vidéos à afficher dans la section équipe
+  const videoPaths = [
+    "/videos/IMG_8165.MP4",
+    "/videos/IMG_8166.MP4",
+    "/videos/IMG_8167.MP4",
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -211,12 +323,12 @@ export default function Home() {
           >
             ÉQUIPE
           </a>
-          <a
-            href="#contact"
-            className="hover:text-[#C1121F] text-sm text-[#2C2C31] font-bold"
-          >
-            CONTACT
-          </a>
+          <button
+             onClick={() => setOpenContact(true)}
+             className="hover:text-[#C1121F] text-sm text-[#2C2C31] font-bold bg-transparent border-none p-0"
+           >
+             CONTACT
+           </button>
         </div>
         <button className="bg-[#C1121F] flex items-center gap-2 text-white font-medium text-base font-jakarta px-4 py-3 rounded-lg hover:bg-red-700">
           <span>
@@ -243,10 +355,10 @@ export default function Home() {
             Sénégal !
           </h1>
 
-          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-[#606065] lg:w-[500px] text-justify font-bold font-jakarta">
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl inline-block text-[#606065] lg:w-[620px] text-justify font-bold font-jakarta">
             L'application révolutionnaire Yabalma est là !
           </p>
-          <p className="text-[#606065] lg:w-[500px] text-justify font-normal font-jakarta text-base leading-5">
+          <p className="text-[#606065] lg:w-[620px] text-justify font-normal font-jakarta text-base leading-5">
             Commandez facilement sur Shein, Temu, Amazon depuis une seule
             application.
             <br />
@@ -305,9 +417,7 @@ export default function Home() {
             <button className="bg-[#C1121F] text-center text-sm uppercase font-jakarta font-bold text-white px-6 py-3 rounded-lg hover:bg-red-700">
               Télécharger l&apos;app
             </button>
-            <button className="border border-[#C1121F] uppercase font-jakarta font-bold text-sm text-[#C1121F] px-6 py-3 rounded-lg hover:bg-red-50">
-              En savoir plus
-            </button>
+                
           </div>
         </div>
         <div className="md:w-1/4 p-2 mt-12 md:mt-0">
@@ -500,11 +610,11 @@ export default function Home() {
         <div className="flex flex-col justify-center md:h-[450px] md:flex-row items-center gap-12">
           <div className="w-3/4 md:w-1/2 space-y-6 pb-4">
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight md:leading-[60px] mt-10 md:mt-20 font-bold font-jakarta w-full md:w-[550px] text-[#3F3F46]">
-              Plusieurs commandes sur différents sites ?
+              Plusieurs <span className="text-[#C1121F]">commandes</span> sur différents sites ?
               <br />
               Pas de panique !
               <br />
-              Regroupez tout en une seule livraison.
+              <span className="text-[#C1121F]">Regroupez</span> tout en une seule <span className="text-[#C1121F]">livraison</span>.
             </h2>
             <p className="text-[#606065] md:w-[550px] font-normal font-jakarta text-base">
               Avec nos fonctionnalités "Blocage panier" et "Regroupement colis",
@@ -603,13 +713,7 @@ export default function Home() {
         <div className="flex flex-col md:flex-row gap-12">
           <div className="md:w-1/2">
             <div className="">
-              <Image
-                src="/real.png"
-                alt="Yabalma App"
-                width={300}
-                height={600}
-                className=""
-              />
+              <PhoneVideoCarousel videos={videoPaths} />
             </div>
           </div>
           <div className="md:w-1/2 space-y-6 mt-10">
@@ -837,19 +941,19 @@ export default function Home() {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="#equipe"
                   className="hover:text-[#C1121F] text-[#3F3F46] font-inter font-medium text-base leading-6"
                 >
                   L&apos;équipe
                 </a>
               </li>
               <li>
-                <a
-                  href="#contact"
-                  className="hover:text-[#C1121F] text-[#3F3F46] font-inter font-medium text-base leading-6"
-                >
-                  Contact
-                </a>
+                <button
+                   onClick={() => setOpenContact(true)}
+                   className="hover:text-[#C1121F] text-[#3F3F46] font-inter font-medium text-base leading-6 bg-transparent border-none p-0"
+                 >
+                   Contact
+                 </button>
               </li>
             </ul>
           </div>
@@ -964,6 +1068,22 @@ export default function Home() {
           </DialogHeader>
           <div className="text-sm text-gray-700 whitespace-pre-line">
             {MentionsLegales()}
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Dialog Contact */}
+      <Dialog open={openContact} onOpenChange={setOpenContact}>
+        <DialogContent className="max-h-[80vh] md:min-w-[50vw] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle>Contactez-nous</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4 text-gray-700">
+            <p>Email : <a href="mailto:contact@yabalma.com" className="text-[#C1121F]">support@yabalma.com</a></p>
+            <p>Téléphone : <a href="tel:+33123456789" className="text-[#C1121F]">+33 1 13 13 13 13</a></p>
+            <p>Lieux : Médina, Rue 37 x 20, Villa n°9816
+             <br/> Dakar, SN
+</p>
           </div>
         </DialogContent>
       </Dialog>
