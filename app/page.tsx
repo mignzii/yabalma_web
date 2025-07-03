@@ -153,9 +153,9 @@ export default function Home() {
 
   // Vidéos à afficher dans la section équipe
   const videoPaths = [
-    "https://drive.google.com/file/d/1dEgqAbR39lhSAoXKcl7-krnlULk15Zz1/view?usp=drive_link",
-    "https://drive.google.com/file/d/1Y_WcKygqIXTszLye03xA0CEKoEK-sDei/view?usp=drive_link",
-    "https://drive.google.com/file/d/1qUH4Rwk686fe9rZNoWmiXnXo_JTuGgEz/view?usp=drive_link",
+    "https://youtube.com/shorts/oBTdm_3SW0w",
+    "https://youtube.com/shorts/m7SYanhY2TI",
+    "https://youtube.com/shorts/-KpOzGB3Qv0",
   ];
 
   useEffect(() => {
