@@ -136,6 +136,9 @@ const PhoneVideoCarousel = ({ videos }: { videos: string[] }) => {
       <iframe
         src={videos[current]}
         className="w-[96%] h-[97%] object-cover rounded-[30px]"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"    
+        allowFullScreen 
+        frameBorder="0" 
       />
     </div>
   );
@@ -153,9 +156,9 @@ export default function Home() {
 
   // Vidéos à afficher dans la section équipe
   const videoPaths = [
-    "https://youtube.com/shorts/oBTdm_3SW0w",
-    "https://youtube.com/shorts/m7SYanhY2TI",
-    "https://youtube.com/shorts/-KpOzGB3Qv0",
+    "https://vvkgkijzjazoehellugh.supabase.co/storage/v1/object/public/yabalmavideo//yabalma1.MP4",
+    "https://vvkgkijzjazoehellugh.supabase.co/storage/v1/object/public/yabalmavideo//yabalma2.MP4",
+    "https://vvkgkijzjazoehellugh.supabase.co/storage/v1/object/public/yabalmavideo//yabalma3.MP4",
   ];
 
   useEffect(() => {
