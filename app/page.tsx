@@ -12,6 +12,10 @@ import {
   List,
   ArrowLeft,
   Instagram,
+  ChevronLeft,
+  ChevronRight,
+  Play,
+  Pause,
 } from "lucide-react";
 import Image from "next/image";
 import { useState, useEffect } from "react";
@@ -83,40 +87,57 @@ const VideoOnScroll = ({ src }: { src: string }) => {
 // Composant téléphone qui affiche une seule "coque" et fait défiler les vidéos les unes après les autres
 const PhoneVideoCarousel = ({ videos }: { videos: string[] }) => {
   const [current, setCurrent] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
 
-  // Passer à la vidéo suivante quand la vidéo courante se termine
+  const handleNext = () => {
+    if (videoRef.current) videoRef.current.pause();
+    setCurrent((prev) => (prev + 1) % videos.length);
+  };
+
+  const handlePrev = () => {
+    if (videoRef.current) videoRef.current.pause();
+    setCurrent((prev) => (prev - 1 + videos.length) % videos.length);
+  };
+
+  const togglePlayPause = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (video.paused) {
+      video.play().catch(() => {});
+    } else {
+      video.pause();
+    }
+  };
+
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
-    const handleEnded = () => {
-      setCurrent((prev) => (prev + 1) % videos.length);
+    const onPlay = () => setIsPlaying(true);
+    const onPause = () => setIsPlaying(false);
+    video.addEventListener("play", onPlay);
+    video.addEventListener("pause", onPause);
+    return () => {
+      video.removeEventListener("play", onPlay);
+      video.removeEventListener("pause", onPause);
     };
-    video.addEventListener("ended", handleEnded);
-    return () => video.removeEventListener("ended", handleEnded);
-  }, [videos, current]);
-
-  // Recharger la nouvelle source et démarrer la lecture
-  useEffect(() => {
-    const video = videoRef.current;
-    if (video) {
-      video.load();
-      video.play().catch(() => {});
-    }
   }, [current]);
 
   // Jouer / pause selon la visibilité
   useEffect(() => {
-    const container = containerRef.current;
     const video = videoRef.current;
-    if (!container || !video) return;
+    const container = containerRef.current;
+    if (!video || !container) return;
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             video.play().catch(() => {});
+            video.muted = false;
           } else {
+            video.muted = true;
             video.pause();
           }
         });
@@ -124,22 +145,46 @@ const PhoneVideoCarousel = ({ videos }: { videos: string[] }) => {
       { threshold: 0.5 }
     );
     observer.observe(container);
-    return () => observer.unobserve(container);
-  }, []);
+    return () => {
+      if (container) observer.unobserve(container);
+    };
+  }, [current]);
 
   return (
     <div
       ref={containerRef}
-      className="relative w-[300px] h-[600px] mx-auto bg-black rounded-[40px] border-[7px] border-red-700 shadow-xl flex items-center justify-center"
+      className="group relative w-[300px] h-[600px] mx-auto bg-black rounded-[40px] border-[7px] border-red-700 shadow-xl flex items-center justify-center overflow-hidden"
     >
-      {/* Écran du téléphone */}
-      <iframe
+      <video
+        ref={videoRef}
+        key={videos[current]}
         src={videos[current]}
-        className="w-[96%] h-[97%] object-cover rounded-[30px]"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"    
-        allowFullScreen 
-        frameBorder="0" 
+        playsInline
+        onEnded={handleNext}
+        className="w-full h-full object-cover rounded-[30px]"
       />
+      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black bg-opacity-20">
+        <div className="flex items-center justify-between w-full px-2">
+          <button
+            onClick={handlePrev}
+            className="bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75"
+          >
+            <ChevronLeft size={24} />
+          </button>
+          <button
+            onClick={togglePlayPause}
+            className="bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75"
+          >
+            {isPlaying ? <Pause size={32} /> : <Play size={32} />}
+          </button>
+          <button
+            onClick={handleNext}
+            className="bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75"
+          >
+            <ChevronRight size={24} />
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
@@ -275,19 +320,16 @@ export default function Home() {
 
   return (
     <motion.div
-      className="min-h-screen"
+      className="min-h-screen pt-24" // pt-24 to avoid content overlap with fixed navbar
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
       {/* Navigation */}
       <motion.nav
-        className={`flex items-center justify-between p-4 md:p-4 bg-[#FFFFFF] transition-all duration-300 ${
-          showNavbar ? "opacity-100 h-auto" : "opacity-0 h-0 overflow-hidden"
-        }`}
-        initial={{ y: -20 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.5 }}
+        className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between p-4 bg-white shadow-md"
+        animate={{ y: showNavbar ? 0 : "-100%" }}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
       >
         <div className="flex items-center">
           <Image
@@ -330,7 +372,7 @@ export default function Home() {
              CONTACT
            </button>
         </div>
-        <button className="bg-[#C1121F] flex items-center gap-2 text-white font-medium text-base font-jakarta px-4 py-3 rounded-lg hover:bg-red-700">
+        <button onClick={() => window.location.href="#contact" } className="bg-[#C1121F] flex items-center gap-2 text-white font-medium text-base font-jakarta px-4 py-3 rounded-lg hover:bg-red-700">
           <span>
             <Smartphone size={16} />
           </span>
@@ -414,7 +456,7 @@ export default function Home() {
             </span>
           </div>
           <div className="flex space-x-4">
-            <button className="bg-[#C1121F] text-center text-sm uppercase font-jakarta font-bold text-white px-6 py-3 rounded-lg hover:bg-red-700">
+            <button onClick={() => window.location.href="#contact" } className="bg-[#C1121F] text-center text-sm uppercase font-jakarta font-bold text-white px-6 py-3 rounded-lg hover:bg-red-700">
               Télécharger l&apos;app
             </button>
                 
@@ -614,7 +656,7 @@ export default function Home() {
               <br />
               Pas de panique !
               <br />
-              <span className="text-[#C1121F]">Regroupez</span> tout en une seule <span className="text-[#C1121F]">livraison</span>.
+              <span className="text-[#C1121F]">Regroupez</span> tout en une seule <span className="text-[#C1121F]">livraison.</span>
             </h2>
             <p className="text-[#606065] md:w-[550px] font-normal font-jakarta text-base">
               Avec nos fonctionnalités "Blocage panier" et "Regroupement colis",
